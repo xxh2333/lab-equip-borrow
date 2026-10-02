@@ -73,6 +73,30 @@ return [
             'replace_placeholders' => true,
         ],
 
+        // 业务日志：记录核心业务流程（注册登录、借用申请、归还等）
+        'business' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/business.log'),
+            'level' => 'info',
+            'days' => 14,
+        ],
+
+        // 异常日志：记录系统异常、错误、崩溃
+        'exception' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/exception.log'),
+            'level' => 'error',
+            'days' => 30,
+        ],
+
+        // 接口日志：记录所有 HTTP API 请求
+        'api' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/api.log'),
+            'level' => 'info',
+            'days' => 7,
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),

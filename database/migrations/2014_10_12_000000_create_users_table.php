@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            // 学号/邮箱，账号唯一（接口文档 1.1）
+            $table->string('username')->unique()->comment('账号：学号/邮箱');
+            $table->string('name')->comment('用户真实姓名');
+            $table->string('password')->comment('密码bcrypt加密');
+            // 角色：1学生，2管理员（接口文档 1.1）
+            $table->unsignedTinyInteger('role')->default(1)->comment('角色：1学生，2管理员');
             $table->rememberToken();
             $table->timestamps();
         });
